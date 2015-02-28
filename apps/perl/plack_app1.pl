@@ -2,6 +2,8 @@
 
 =head2 plack_app1.pl
 
+run: plackup -o localhost -p 8000 plack_app1.pl
+
 =cut
 
 use strict;
