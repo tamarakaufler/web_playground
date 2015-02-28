@@ -1,6 +1,6 @@
 #!/usr/bin/perl 
 
-=head2 parallel_workerq.pl
+=head2 parallel_worker.pl
 
 two implementations of forking child processes
 
