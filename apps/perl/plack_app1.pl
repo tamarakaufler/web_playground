@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-=head2 plack_server1.pl
+=head2 plack_app1.pl
 
 =cut
 
@@ -20,7 +20,7 @@ use CHI;
 =cut
 
 my $cache = CHI->new( driver => 'FastMmap',
-    root_dir   => '/tmp/plack1_cache',
+    root_dir   => '/tmp/plack_app1_cache',
     cache_size => '4k');
 my $cache_key = "${0}_message";
 $cache->remove($cache_key);
