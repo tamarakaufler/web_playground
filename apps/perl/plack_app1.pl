@@ -11,8 +11,8 @@ use warnings;
 use v5.018;
 use utf8;
 
-use Data::Dumper qw(Dumper);
-$Data::Dumper::Sortkeys = 1;
+#use Data::Dumper qw(Dumper);
+#$Data::Dumper::Sortkeys = 1;
  
 use Plack::Request;
 use CHI;
