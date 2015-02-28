@@ -16,5 +16,17 @@ chat_server.pl:
                                         method b) shows how to approach implementing
                                         a custom protocol
 
+nodejs:
+
+chat_server/app.js:
+    Web socket
+    server and client socket.io, express modules
+    
+    server:     cd chat_server
+                nodejs app.js
+    clients:    in browser:     in several tabs:    http://localhost:8000/
+                                                    enter message in one tab and see the message
+                                                    broadcast in the others
+
 
 
