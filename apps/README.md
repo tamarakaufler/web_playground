@@ -9,3 +9,6 @@ plack_app1.pl:
 
     previous messages stored in in-memory cache and displayed
         before the latest message
+        
+parallel_worker1.pl
+    two implementations of parrallelized processing by forking child processes
