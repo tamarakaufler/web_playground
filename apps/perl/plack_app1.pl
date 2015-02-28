@@ -19,6 +19,9 @@ use CHI;
 
 =head3 Cache messages for later display together with the latest message
 
+messages are cached on the file system, so will survive the server restart
+the storage is limited to 4kb
+
 =cut
 
 my $cache = CHI->new( driver => 'FastMmap',
