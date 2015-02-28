@@ -21,10 +21,15 @@ my $pm = Parallel::ForkManager->new(4);
 
 =head3 Process all files in parallel
 
-loops through all the files to be processed
+loops through all the files to be procexssed
 creates/forks child processes
-reaps deal child processes
-
+reaps deal child processes:
+    reaping of dead child processes/zombies. Zombies are processes,
+    that have finished execution, but remain in the process table,
+    if the parent process need to inquire about the child process
+    exit status. If, for some reason, the zombies are not removed
+    from the process table (reaped, by reading the child status 
+    through the wait system call), can lead to resource leaks.
 2 implementations:
     a) with Parallel::ForkManager
     b) with fork:
