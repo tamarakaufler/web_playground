@@ -1,15 +1,19 @@
-#!/usr/bin/perl 
+#!/usr/bin/perl
 #===============================================================================
 #
-#         FILE: thread_pool.pl.pl
+#         FILE: thread_pool.pl
 #
-#        USAGE: ./thread_pool.pl.pl  
+#        USAGE: perl thread_pool.pl 
 #
-#  DESCRIPTION: two implementations:
+#  DESCRIPTION: script comparing job processing done by one thread and a pool
+#               of threads. Jobs are added to a job queue, from which they are
+#               taken one by one by a thread that is available to do the work.
+#               Both implementations are non-blocking.
+#
+#               two implementations:
 #                   a) no pool/one thread only:
 #                           one work queue and one thread taking jobs put on the work queue
-#                   b) a pool of threads, that are taking jobs off the work queue
-#                           non-blocking
+#                   b) a pool of threads, that are taking jobs off a work queue
 #
 #      OPTIONS: ---
 # REQUIREMENTS: ---
