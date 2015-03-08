@@ -34,7 +34,6 @@ use utf8;
 use v5.018;
 
 use threads;
-use threads::shared;
 use Thread::Queue;
 
 my ($t0_a, $t1_a, $t0_b, $t1_b, $td_a, $td_b);
