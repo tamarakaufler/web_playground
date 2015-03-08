@@ -6,7 +6,12 @@
 #        USAGE: perl thread_pool.pl 
 #
 #  DESCRIPTION: script comparing job processing done by one thread and a pool
-#               of threads. Jobs are added to a job queue, from which they are
+#               of threads. 
+#
+#               The task is to add numbers stored one per line in files in a particular
+#               directory. 
+#
+#               Jobs (job == file to process) are added to a job queue, from which they are
 #               taken one by one by a thread that is available to do the work.
 #               Both implementations are non-blocking.
 #
@@ -67,6 +72,7 @@ $q->enqueue(@files);
 say "\n*************************************************";
 say "*** One thread takes jobs off a job queue ***";
 say "*************************************************\n";
+
 say "Pending jobs:";
 p $q->pending();
 
@@ -99,8 +105,6 @@ my $thr = threads->create(
 {
     my @thr_results = map { $_->join() } threads->list();
 
-    p $q->pending();
-
     $t1_a = Benchmark->new;
     $td_a = timestr(timediff($t1_a, $t0_a));
 
@@ -109,13 +113,14 @@ my $thr = threads->create(
     say "Run time = $td_a";
 }
 
-=head2 Pool of threads
+=head2 Thread pool
 
 =cut
 
 say "\n*************************************************";
 say "*** A pool of threads: each thread takes jobs off\nthe job queue while jobs are available ***";
 say "*************************************************\n";
+
 say "Pending jobs after the previous processing:";
 p $q->pending();
 
@@ -123,14 +128,17 @@ p $q->pending();
 $q->enqueue(@files);
 
 # Signal that there is no more work to be sent
-# $q->end();
+$q->end();
 
 say "Pending jobs:";
 p $q->pending();
 
 $t0_b = Benchmark->new;
 
+# Lower the number of created threads if the number of jobs is lower than the
+# allowed thread limit
 $MAX_THREADS = ($MAX_THREADS > $files_count) ? $files_count : $MAX_THREADS;
+
 say "\nCreating a pool of $MAX_THREADS threads\n";
 
 for (1 .. $MAX_THREADS) {;
@@ -148,7 +156,6 @@ for (1 .. $MAX_THREADS) {;
                 $sum += $incr_sum; 
             }
             return $sum;
-
         }
     );
 }
@@ -160,7 +167,10 @@ for (1 .. $MAX_THREADS) {;
 {
     my @thr_results = map { $_->join() } threads->list();
 
+    say "Pending jobs:";
     p $q->pending();
+
+    say "Collected results:";
     p @thr_results;
 
     $t1_b = Benchmark->new;
@@ -185,7 +195,7 @@ sub _get_file_sum {
 
     open my $fh, '<', $file or die "$!";
 
-    #sleep int(rand(5));
+    # For benchmarking purposes
     sleep 1;
 
     my $work;
